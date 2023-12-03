@@ -23,6 +23,7 @@ export default component$(() => {
         <main>
           <Slot />
         </main>
+        <footer>Drag and drop to reorder list</footer>
       </div>
     </>
   );
