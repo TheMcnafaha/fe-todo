@@ -15,15 +15,17 @@ export const onGet: RequestHandler = async ({ cacheControl }) => {
 export default component$(() => {
   return (
     <>
-      <div class="max-w-xs px-2">
-        <header class="flex w-full justify-between py-8">
+      <div class=" max-w-xs ">
+        <header class="bg-grey-blue flex w-full justify-between px-2 py-8 text-[white]">
           <h1>TODO</h1>
           <p>Icon</p>
         </header>
         <main>
           <Slot />
         </main>
-        <footer>Drag and drop to reorder list</footer>
+        <footer class="bg-light-gray text-light-hover-gray-blue mt-10 flex justify-center">
+          Drag and drop to reorder list
+        </footer>
       </div>
     </>
   );
