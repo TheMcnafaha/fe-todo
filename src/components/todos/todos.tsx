@@ -1,4 +1,5 @@
 import { component$, useSignal } from "@builder.io/qwik";
+import { CheckMark } from "../check-mark/check-mark";
 
 export interface TodosProps {}
 
@@ -14,17 +15,20 @@ export const Todos = component$<TodosProps>((props) => {
   return (
     <>
       <div class="mb-8">
-        <ul class=" border-dark-gray-blue  rounded-md drop-shadow-sm">
+        <ul class=" rounded-md  border-dark-gray-blue drop-shadow-sm">
           {todos.value.map((todo, i, e) => {
             const className = getTodoClass(i, e.length);
             return (
               <li key={i} class={className}>
-                {todo}
+                <div class=" wrap flex w-full flex-wrap items-center gap-3 pl-6">
+                  <CheckMark />
+                  {todo}
+                </div>
               </li>
             );
           })}
         </ul>
-        <div class=" m-[.105rem] flex justify-between rounded-b-md bg-[white] px-2 py-3 drop-shadow-sm ">
+        <div class=" mt-[.105rem] flex justify-between rounded-b-md bg-[white] px-2 py-3 drop-shadow-sm ">
           <p>5 items left</p>
           <p> Clear Completed</p>
         </div>
@@ -34,7 +38,7 @@ export const Todos = component$<TodosProps>((props) => {
 });
 function getTodoClass(index: number, length: number): string {
   if (index === 0) {
-    return "rounded-t-md bg-[white] m-[.105rem] px-2 py-3  ";
+    return "rounded-t-md bg-[white] w-full mt-[.105rem]  py-3  ";
   }
-  return "bg-[white] px-2 py-3 m-[.105rem] ";
+  return "bg-[white]  py-3 w-full mt-[.105rem] ";
 }
