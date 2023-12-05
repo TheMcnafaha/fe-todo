@@ -1,5 +1,6 @@
 import { component$, useSignal } from "@builder.io/qwik";
 import { CheckMark } from "../check-mark/check-mark";
+import { Todo } from "../todo/todo";
 
 export interface TodosProps {}
 
@@ -20,10 +21,7 @@ export const Todos = component$<TodosProps>((props) => {
             const className = getTodoClass(i, e.length);
             return (
               <li key={i} class={className}>
-                <div class=" wrap flex w-full flex-wrap items-center gap-3 pl-6">
-                  <CheckMark />
-                  {todo}
-                </div>
+                <Todo text={todo} />
               </li>
             );
           })}

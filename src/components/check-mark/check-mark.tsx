@@ -1,27 +1,19 @@
 import { component$, useSignal } from "@builder.io/qwik";
 
-export interface CheckMarkProps {}
+export interface CheckMarkProps {
+  clicked: boolean;
+}
 
-export const CheckMark = component$<CheckMarkProps>((props) => {
-  const clicked = useSignal(false);
+export const CheckMark = component$<CheckMarkProps>(({ clicked }) => {
   let className =
     "flex h-[1.15rem] w-[1.15rem] items-center justify-center  rounded-full border-[1px]  border-gray-hover-blue  ";
-  if (clicked.value) {
+  if (clicked) {
     className =
-      "flex h-[1.15rem] w-[1.15rem] items-center justify-center  rounded-full border-0  border-[1px] border-gray-hover-blue bg-gradient-to-br from-lg-cyan to-lg-magnenta ";
+      "flex h-[1.15rem] w-[1.15rem] items-center justify-center  rounded-full border-0   border-gray-hover-blue bg-gradient-to-br from-lg-cyan to-lg-magnenta ";
   }
-  return (
-    <div
-      class={className}
-      onClick$={(e) => {
-        clicked.value = !clicked.value;
-      }}
-    >
-      {clicked.value && <CheckSymbol />}
-    </div>
-  );
+  return <div class={className}>{clicked && <CheckSymbol />}</div>;
 });
 
-export const CheckSymbol = component$<CheckMarkProps>((props) => {
+export const CheckSymbol = component$(() => {
   return <img src="/icon-check.svg" alt="checked" />;
 });
