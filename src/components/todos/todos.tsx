@@ -1,18 +1,12 @@
-import { component$, useSignal } from "@builder.io/qwik";
+import { Signal, component$, useSignal } from "@builder.io/qwik";
 import { CheckMark } from "../check-mark/check-mark";
 import { Todo } from "../todo/todo";
 
-export interface TodosProps {}
+export interface TodosProps {
+  todos: Signal<string[]>;
+}
 
-const defaultTodos = [
-  "Jog around the park 3x",
-  "10 minutes meditation",
-  "Read for 1 hour",
-  "Pick up groceries",
-  "Complete Todo App on Frontend Mentor 💀💀💀",
-];
-export const Todos = component$<TodosProps>((props) => {
-  const todos = useSignal<string[]>(defaultTodos);
+export const Todos = component$<TodosProps>(({ todos }) => {
   return (
     <>
       <div class="mb-8">
