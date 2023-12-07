@@ -15,7 +15,7 @@ export const Todos = component$<TodosProps>(({ todos }) => {
             const className = getTodoClass(i, e.length);
             return (
               <li key={i} class={className}>
-                <Todo text={todo} />
+                <Todo index={i} text={todo} todos={todos} />
               </li>
             );
           })}
@@ -33,4 +33,8 @@ function getTodoClass(index: number, length: number): string {
     return "rounded-t-md bg-[white] w-full mt-[.105rem]  py-3  ";
   }
   return "bg-[white]  py-3 w-full mt-[.105rem] ";
+}
+function deleteTodo(index: number, todos: Signal<string[]>) {
+  const goodTodo = todos.value.filter((e, i) => i !== index);
+  todos.value = goodTodo;
 }
