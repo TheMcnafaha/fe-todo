@@ -1,10 +1,11 @@
 import { Signal, component$, useSignal } from "@builder.io/qwik";
 import { CheckMark } from "../check-mark/check-mark";
+import { TodoObj } from "~/routes";
 
 export interface TodoProps {
   text: string;
   index: number;
-  todos: Signal<string[]>;
+  todos: Signal<TodoObj[]>;
 }
 
 export const Todo = component$<TodoProps>(({ text, index, todos }) => {

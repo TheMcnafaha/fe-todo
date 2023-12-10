@@ -4,12 +4,16 @@ import { AddTodo } from "~/components/add-todo/add-todo";
 import { StatusesBar } from "~/components/statuses-bar/statuses-bar";
 import { Todos } from "~/components/todos/todos";
 
-const defaultTodos = [
-  "Jog around the park 3x",
-  "10 minutes meditation",
-  "Read for 1 hour",
-  "Pick up groceries",
-  "Complete Todo App on Frontend Mentor 💀💀💀",
+export type TodoObj={
+  text:string,
+  completed:boolean
+}
+const defaultTodos:TodoObj[] = [
+{text:  "Jog around the park 3x",completed:false},
+{text:  "10 minutes meditation",completed:false},
+  {text:  "Read for 1 hour",completed:false},
+  {text:  "Pick up groceries",completed:false},
+    {text:  "Complete Todo App on Frontend Mentor 💀💀💀",completed:false},
 ];
 export default component$(() => {
   const todos = useSignal<string[]>(defaultTodos);

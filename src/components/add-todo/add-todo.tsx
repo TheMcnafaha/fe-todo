@@ -1,8 +1,9 @@
 import { Signal, component$ } from "@builder.io/qwik";
 import { CheckMark } from "../check-mark/check-mark";
+import { TodoObj } from "~/routes";
 
 export interface AddTodoProps {
-  todos: Signal<string[]>;
+  todos: Signal<TodoObj[]>;
 }
 
 export const AddTodo = component$<AddTodoProps>(({ todos }) => {
@@ -14,7 +15,7 @@ export const AddTodo = component$<AddTodoProps>(({ todos }) => {
         const input = document.getElementById("addTodo") as HTMLInputElement;
         const text = input.value;
         if (text !== "") {
-          todos.value = [...todos.value, text];
+          todos.value = [...todos.value, {text:text,completed:false}];
           input.value = "";
         }
         console.log("submitted: ", text);

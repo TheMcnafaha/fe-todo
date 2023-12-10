@@ -1,9 +1,9 @@
-import { Signal, component$, useSignal } from "@builder.io/qwik";
-import { CheckMark } from "../check-mark/check-mark";
+import { Signal, component$ } from "@builder.io/qwik";
 import { Todo } from "../todo/todo";
+import { TodoObj } from "~/routes";
 
 export interface TodosProps {
-  todos: Signal<string[]>;
+  todos: Signal<TodoObj[]>;
 }
 
 export const Todos = component$<TodosProps>(({ todos }) => {
@@ -12,10 +12,10 @@ export const Todos = component$<TodosProps>(({ todos }) => {
       <div class="mb-8">
         <ul class=" rounded-md  border-dark-gray-blue drop-shadow-sm">
           {todos.value.map((todo, i, e) => {
-            const className = getTodoClass(i, e.length);
+            const className = getTodoClass(i);
             return (
-              <li key={i} class={className}>
-                <Todo index={i} text={todo} todos={todos} />
+              <li key={todo.text} class={className}>
+                <Todo index={i} text={todo.text} todos={todos} />
               </li>
             );
           })}
@@ -28,13 +28,9 @@ export const Todos = component$<TodosProps>(({ todos }) => {
     </>
   );
 });
-function getTodoClass(index: number, length: number): string {
+function getTodoClass(index: number, ): string {
   if (index === 0) {
     return "rounded-t-md bg-[white] w-full mt-[.105rem]  py-3  ";
   }
   return "bg-[white]  py-3 w-full mt-[.105rem] ";
-}
-function deleteTodo(index: number, todos: Signal<string[]>) {
-  const goodTodo = todos.value.filter((e, i) => i !== index);
-  todos.value = goodTodo;
 }
