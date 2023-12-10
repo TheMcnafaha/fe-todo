@@ -1,4 +1,4 @@
-import { Signal, component$, useSignal } from "@builder.io/qwik";
+import { Signal, component$, useComputed$, useSignal, useTask$ } from "@builder.io/qwik";
 import { Todo } from "../todo/todo";
 import { TodoObj } from "~/routes";
 import { StatusesBar } from "../statuses-bar/statuses-bar";
@@ -10,16 +10,20 @@ export interface TodosProps {
 export type TodoStatus="completed"|"all"|"active"
 export const Todos = component$<TodosProps>(({ todos }) => {
   const status=useSignal<TodoStatus>("all")
-  let filteredTodos=todos.value
-  if (status.value==="completed") {
-   const goodTodos=filteredTodos.filter(todo=>todo.completed===false)
-    filteredTodos=goodTodos
-  }
+  let filteredTodos=useComputed$( ( ) => { 
+    if (status.value==="all") {
+     return todos.value 
+    }
+    if (status.value==="active") {
+     return todos.value.filter(todo=>!todo.completed) 
+    }
+    return todos.value.filter(todo=>todo.completed)
+  })
   return (
     <>
       <div class="mb-8">
         <ul class=" rounded-md  border-dark-gray-blue drop-shadow-sm">
-          {filteredTodos.map((todo, i, e) => {
+          {filteredTodos.value.map((todo, i, e) => {
             const className = getTodoClass(i);
             return (
               <li key={todo.text} class={className}>

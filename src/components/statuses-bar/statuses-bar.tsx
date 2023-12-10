@@ -14,16 +14,18 @@ export const StatusesBar = component$<StatusesBarProps>(({status}) => {
          return (
             <>
             <p>lol</p>
-         <div class=" text-bright-blue"> {e} </div>
+         <div key={e} class=" text-bright-blue"> {e} </div>
             </>
          ) 
         }
         return (
         <div onClick$={(elem) => { 
-const text=elem.target.innerText
+const text=elem.target.innerText 
             console.log(text);
            status.value=text.toLowerCase() 
-          }}> {e}</div>
+          }}
+key={e}
+          > {e}</div>
         )
       })}
     </div>
