@@ -16,12 +16,11 @@ const defaultTodos:TodoObj[] = [
     {text:  "Complete Todo App on Frontend Mentor 💀💀💀",completed:false},
 ];
 export default component$(() => {
-  const todos = useSignal<string[]>(defaultTodos);
+  const todos = useSignal<TodoObj[]>(defaultTodos);
   return (
     <>
       <AddTodo todos={todos} />
       <Todos todos={todos} />
-      <StatusesBar />
     </>
   );
 });

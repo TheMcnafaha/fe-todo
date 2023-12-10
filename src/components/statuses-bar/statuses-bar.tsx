@@ -1,13 +1,31 @@
-import { component$ } from "@builder.io/qwik";
+import { Signal, component$ } from "@builder.io/qwik";
+import { TodoStatus } from "../todos/todos";
 
-export interface StatusesBarProps {}
+export interface StatusesBarProps {
+  status:Signal<TodoStatus>
+}
 
-export const StatusesBar = component$<StatusesBarProps>((props) => {
+export const StatusesBar = component$<StatusesBarProps>(({status}) => {
+  const statuses=["All","Active","Completed", ]
   return (
-    <div class="flex justify-around rounded-md bg-[white] px-3 py-4 drop-shadow-sm ">
-      <div> All </div>
-      <div>Active</div>
-      <div>Completed</div>
+    <div class="flex justify-around  rounded-md bg-[white] px-3 py-4 drop-shadow-sm ">
+      {statuses.map(e=>{
+        if (e.toLowerCase()===status.value) {
+         return (
+            <>
+            <p>lol</p>
+         <div class=" text-bright-blue"> {e} </div>
+            </>
+         ) 
+        }
+        return (
+        <div onClick$={(elem) => { 
+const text=elem.target.innerText
+            console.log(text);
+           status.value=text.toLowerCase() 
+          }}> {e}</div>
+        )
+      })}
     </div>
   );
 });
