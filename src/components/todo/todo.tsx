@@ -21,6 +21,13 @@ export const Todo = component$<TodoProps>(({ text, index, todos }) => {
         class={className}
         onClick$={() => {
           clicked.value = !clicked.value;
+          const goodTodos=todos.value.map((todo,i)=>{
+            if (i===index) {
+            return {...todo,completed:!todo.completed} 
+            }
+            return todo
+          })
+          todos.value=goodTodos
         }}
       >
         <CheckMark clicked={clicked.value} />
