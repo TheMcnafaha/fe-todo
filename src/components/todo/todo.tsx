@@ -4,14 +4,15 @@ import { TodoObj } from "~/routes";
 
 export interface TodoProps {
   text: string;
-  index: number;
+  todo:TodoObj;
   todos: Signal<TodoObj[]>;
 }
 
-export const Todo = component$<TodoProps>(({ text, index, todos }) => {
-  const clicked = useSignal(false);
+export const Todo = component$<TodoProps>(({ text, todo, todos }) => {
+  const clicked = todo.completed
+  const index=todos.value.indexOf(todo)
   let className = " wrap flex w-full flex-wrap items-center gap-3 pl-6";
-  if (clicked.value) {
+  if (clicked) {
     className =
       "  wrap flex w-full flex-wrap items-center gap-3 pl-6 line-through";
   }
@@ -20,7 +21,6 @@ export const Todo = component$<TodoProps>(({ text, index, todos }) => {
       <a
         class={className}
         onClick$={() => {
-          clicked.value = !clicked.value;
           const goodTodos=todos.value.map((todo,i)=>{
             if (i===index) {
             return {...todo,completed:!todo.completed} 
@@ -30,7 +30,7 @@ export const Todo = component$<TodoProps>(({ text, index, todos }) => {
           todos.value=goodTodos
         }}
       >
-        <CheckMark clicked={clicked.value} />
+        <CheckMark clicked={clicked} />
         {text}
       </a>
 

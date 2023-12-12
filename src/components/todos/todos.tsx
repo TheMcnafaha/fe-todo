@@ -27,7 +27,7 @@ export const Todos = component$<TodosProps>(({ todos }) => {
             const className = getTodoClass(i);
             return (
               <li key={todo.text} class={className}>
-                <Todo index={i} text={todo.text} todos={todos} />
+                <Todo todo={todo} text={todo.text} todos={todos} />
               </li>
             );
           })}
