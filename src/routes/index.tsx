@@ -19,8 +19,8 @@ export default component$(() => {
   const todos = useSignal<TodoObj[]>(defaultTodos);
   return (
     <>
-      <AddTodo todos={todos} />
-      <Todos todos={todos} />
+<AddTodo todos={todos} />
+<Todos todos={todos} />
     </>
   );
 });

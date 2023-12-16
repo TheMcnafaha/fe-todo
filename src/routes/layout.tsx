@@ -26,7 +26,7 @@ console.log("change  theme");
 <img src="./public/icon-moon.svg" alt="" />
           </a>
         </header>
-        <main class="">
+        <main class="dark:text-grey-blue">
           <Slot />
         </main>
         <footer class="mt-10 flex justify-center bg-light-gray text-light-hover-gray-blue">

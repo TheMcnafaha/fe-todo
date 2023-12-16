@@ -23,7 +23,8 @@ export const Todos = component$<TodosProps>(({ todos }) => {
   return (
     <>
       <div class="mb-8">
-        <ul class=" rounded-md   border-dark-gray-blue drop-shadow-sm">
+        <div class="dark:bg-dark-gray-blue rounded-t-lg rounded-b-lg">
+<ul class=" rounded-md border-dark-gray-blue drop-shadow-sm">
           {filteredTodos.value.map((todo, i, e) => {
             const className = getTodoClass(i);
             return (
@@ -33,12 +34,13 @@ export const Todos = component$<TodosProps>(({ todos }) => {
             );
           })}
         </ul>
-        <div class=" mt-[.105rem] flex justify-between rounded-b-md bg-[white] px-2 py-3 drop-shadow-sm ">
+        <div class=" mt-[.1rem] flex justify-between rounded-b-md bg-[white] dark:bg-dark-saturated-blue px-2 py-3 drop-shadow-sm ">
           <p>{itemsLeft} items left</p>
           <a onClick$={( ) => { 
 todos.value=todos.value.filter(todo=>todo.completed===false)
           }}> <p> Clear Completed</p> </a>
           
+        </div>
         </div>
       </div>
       <StatusesBar status={status}/>
@@ -47,7 +49,7 @@ todos.value=todos.value.filter(todo=>todo.completed===false)
 });
 function getTodoClass(index: number, ): string {
   if (index === 0) {
-    return "rounded-t-md bg-[white] w-full mt-[.105rem]  py-3  ";
+    return "rounded-t-md bg-[white] dark:bg-dark-saturated-blue w-full mt-[.105rem]  py-3  ";
   }
-  return "bg-[white]  py-3 w-full mt-[.105rem] ";
+  return "bg-[white] dark:bg-dark-saturated-blue  py-3 w-full mt-[.105rem] ";
 }

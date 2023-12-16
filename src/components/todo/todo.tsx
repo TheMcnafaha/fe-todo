@@ -14,7 +14,7 @@ export const Todo = component$<TodoProps>(({ text, todo, todos }) => {
   let className = " wrap flex w-full flex-wrap items-center gap-3 pl-6";
   if (clicked) {
     className =
-      "  wrap flex w-full flex-wrap items-center gap-3 pl-6 line-through";
+      "  wrap flex w-full dark:text-dark-gray-blue flex-wrap items-center gap-3 pl-6 line-through";
   }
   return (
     <div class="flex items-center">
