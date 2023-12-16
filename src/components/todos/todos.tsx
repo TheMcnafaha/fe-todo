@@ -23,7 +23,7 @@ export const Todos = component$<TodosProps>(({ todos }) => {
   return (
     <>
       <div class="mb-8">
-        <ul class=" rounded-md  border-dark-gray-blue drop-shadow-sm">
+        <ul class=" rounded-md   border-dark-gray-blue drop-shadow-sm">
           {filteredTodos.value.map((todo, i, e) => {
             const className = getTodoClass(i);
             return (
@@ -33,7 +33,7 @@ export const Todos = component$<TodosProps>(({ todos }) => {
             );
           })}
         </ul>
-        <div class=" mt-[.105rem] flex justify-between rounded-b-md bg-[white] px-2 py-3 drop-shadow-sm ">
+        <div class=" mt-[.105rem] dark:bg-[red]  flex justify-between rounded-b-md bg-[white] px-2 py-3 drop-shadow-sm ">
           <p>{itemsLeft} items left</p>
           <a onClick$={( ) => { 
 todos.value=todos.value.filter(todo=>todo.completed===false)

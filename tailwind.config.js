@@ -3,7 +3,8 @@ module.exports = {
   content: ["./src/**/*.{js,ts,jsx,tsx,mdx}"],
   darkMode: "class",
   theme: {
-    colors: {
+    extend: {
+colors: {
       "light-gray": "hsl(0, 0%, 98%)",
       "light-gray-blue": "hsl(236, 33%, 92%)",
       "lighter-gray-blue": "hsl(233, 11%, 84%)",
@@ -22,7 +23,7 @@ module.exports = {
       "lg-cyan": "hsl(192, 100%, 67%)",
       "lg-magnenta": "hsl(280, 87%, 65%)",
     },
-    extend: {},
+    },
   },
   plugins: [],
 };

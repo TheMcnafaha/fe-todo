@@ -17,15 +17,16 @@ export default component$(() => {
     <>
       <img class="absolute -z-10" src="./public/bg-mobile-light.jpg" alt="" />
       <div class=" max-w-xs ">
-        <header class=" flex dark:bg-red-500  justify-between px-2 py-8 text-2xl font-bold tracking-widest text-[white]">
+        <header class=" flex   justify-between px-2 py-8 text-2xl font-bold tracking-widest text-[white]">
           <h1>TODO</h1>
           <a id="toggle-theme" onClick$={ ( ) => { 
 console.log("change  theme");
+            document.querySelector("main")?.classList.toggle("dark")
 }} >
 <img src="./public/icon-moon.svg" alt="" />
           </a>
         </header>
-        <main>
+        <main class="">
           <Slot />
         </main>
         <footer class="mt-10 flex justify-center bg-light-gray text-light-hover-gray-blue">
