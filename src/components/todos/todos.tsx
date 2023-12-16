@@ -19,6 +19,7 @@ export const Todos = component$<TodosProps>(({ todos }) => {
     }
     return todos.value.filter(todo=>todo.completed)
   })
+  const itemsLeft=filteredTodos.value.length 
   return (
     <>
       <div class="mb-8">
@@ -33,8 +34,11 @@ export const Todos = component$<TodosProps>(({ todos }) => {
           })}
         </ul>
         <div class=" mt-[.105rem] flex justify-between rounded-b-md bg-[white] px-2 py-3 drop-shadow-sm ">
-          <p>5 items left</p>
-          <p> Clear Completed</p>
+          <p>{itemsLeft} items left</p>
+          <a onClick$={( ) => { 
+todos.value=todos.value.filter(todo=>todo.completed===false)
+          }}> <p> Clear Completed</p> </a>
+          
         </div>
       </div>
       <StatusesBar status={status}/>

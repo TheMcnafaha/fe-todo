@@ -13,16 +13,16 @@ export const StatusesBar = component$<StatusesBarProps>(({status}) => {
         if (e.toLowerCase()===status.value) {
          return (
             <>
-            <p>lol</p>
          <div key={e} class=" text-bright-blue"> {e} </div>
             </>
          ) 
         }
         return (
         <div onClick$={(elem) => { 
-const text=elem.target.innerText 
+            const input=elem.target as HTMLElement
+const text=input.innerText.toLowerCase()  as TodoStatus
             console.log(text);
-           status.value=text.toLowerCase() 
+           status.value=text
           }}
 key={e}
           > {e}</div>

@@ -22,8 +22,30 @@ export default component$(() => {
         <meta charSet="utf-8" />
         <link rel="manifest" href="/manifest.json" />
         <RouterHead />
+        <script
+          dangerouslySetInnerHTML={`
+        (function() {
+          function setTheme(theme) {
+            document.documentElement.className = theme;
+            localStorage.setItem('theme', theme);
+          }
+          var theme = localStorage.getItem('theme');
+          console.log(theme);
+          if (theme) {
+            setTheme(theme);
+          } else {
+            setTheme('light');
+          }
+        })();
+        window.addEventListener('load', function() {
+          var themeSwitch = document.getElementById('toggle-theme');
+          themeSwitch.checked = localStorage.getItem('theme') === 'light'? true: false;
+        }
+        );
+      `}
+        ></script>
       </head>
-      <body lang="en" class="bg-light-gray flex flex-col items-center">
+      <body lang="en" class="bg-light-gray dark:bg-red-500 flex flex-col items-center">
         <RouterOutlet />
         <ServiceWorkerRegister />
       </body>

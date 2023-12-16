@@ -17,9 +17,13 @@ export default component$(() => {
     <>
       <img class="absolute -z-10" src="./public/bg-mobile-light.jpg" alt="" />
       <div class=" max-w-xs ">
-        <header class=" flex  justify-between px-2 py-8 text-2xl font-bold tracking-widest text-[white]">
+        <header class=" flex dark:bg-red-500  justify-between px-2 py-8 text-2xl font-bold tracking-widest text-[white]">
           <h1>TODO</h1>
-          <p>Icon</p>
+          <a id="toggle-theme" onClick$={ ( ) => { 
+console.log("change  theme");
+}} >
+<img src="./public/icon-moon.svg" alt="" />
+          </a>
         </header>
         <main>
           <Slot />
