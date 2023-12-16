@@ -33,7 +33,7 @@ export const Todos = component$<TodosProps>(({ todos }) => {
             );
           })}
         </ul>
-        <div class=" mt-[.105rem] dark:bg-[red]  flex justify-between rounded-b-md bg-[white] px-2 py-3 drop-shadow-sm ">
+        <div class=" mt-[.105rem] flex justify-between rounded-b-md bg-[white] px-2 py-3 drop-shadow-sm ">
           <p>{itemsLeft} items left</p>
           <a onClick$={( ) => { 
 todos.value=todos.value.filter(todo=>todo.completed===false)

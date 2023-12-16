@@ -21,7 +21,7 @@ export default component$(() => {
           <h1>TODO</h1>
           <a id="toggle-theme" onClick$={ ( ) => { 
 console.log("change  theme");
-            document.querySelector("main")?.classList.toggle("dark")
+            document.querySelector("html")?.classList.toggle("dark")
 }} >
 <img src="./public/icon-moon.svg" alt="" />
           </a>
