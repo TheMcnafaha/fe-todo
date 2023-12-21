@@ -1,4 +1,4 @@
-import { component$, Slot } from "@builder.io/qwik";
+import { component$, Slot, useOnDocument, $ } from "@builder.io/qwik";
 import type { RequestHandler } from "@builder.io/qwik-city";
 
 export const onGet: RequestHandler = async ({ cacheControl }) => {
@@ -23,13 +23,16 @@ export default component$(() => {
 console.log("change  theme");
             document.querySelector("html")?.classList.toggle("dark")
 }} >
-<img src="./public/icon-moon.svg" alt="" />
+            <div id="theme-img"> 
+<img class="dark:hidden block" src="/icon-sun.svg" alt="" />
+<img class="hidden dark:block" src="/icon-moon.svg" alt="" />
+            </div>
           </a>
         </header>
         <main class="dark:text-grey-blue">
           <Slot />
         </main>
-        <footer class="mt-10 flex justify-center bg-light-gray text-light-hover-gray-blue">
+        <footer class="mt-10 flex justify-center bg-light-gray dark:bg-dark-blue dark:text-dark-gray-blue text-light-hover-gray-blue">
           Drag and drop to reorder list
         </footer>
       </div>

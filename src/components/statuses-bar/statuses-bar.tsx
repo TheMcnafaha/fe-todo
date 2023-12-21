@@ -8,7 +8,7 @@ export interface StatusesBarProps {
 export const StatusesBar = component$<StatusesBarProps>(({status}) => {
   const statuses=["All","Active","Completed", ]
   return (
-    <div class="flex justify-around  rounded-md bg-[white] dark:bg-dark-saturated-blue px-3 py-4 drop-shadow-sm ">
+    <div class="flex justify-around dark:text-dark-gray-blue  rounded-md bg-[white] dark:bg-dark-saturated-blue px-3 py-4 drop-shadow-sm ">
       {statuses.map(e=>{
         if (e.toLowerCase()===status.value) {
          return (

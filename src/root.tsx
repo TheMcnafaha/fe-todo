@@ -1,4 +1,4 @@
-import { component$ } from "@builder.io/qwik";
+import { component$, useSignal } from "@builder.io/qwik";
 import {
   QwikCityProvider,
   RouterOutlet,
@@ -22,6 +22,16 @@ export default component$(() => {
         <meta charSet="utf-8" />
         <link rel="manifest" href="/manifest.json" />
         <RouterHead />
+<script
+          dangerouslySetInnerHTML={`
+        (function() {
+const isDarkmode=window.matchMedia('(prefers-color-scheme: dark)').matches
+  if (isDarkmode) {
+   document.querySelector("html")?.classList.add("dark")
+  }  
+        })();
+      `}
+        ></script>
         </head>
       <body lang="en" class="bg-light-gray dark:bg-dark-blue flex flex-col items-center">
         <RouterOutlet />

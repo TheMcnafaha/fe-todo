@@ -9,7 +9,7 @@ export interface AddTodoProps {
 export const AddTodo = component$<AddTodoProps>(({ todos }) => {
   return (
     <form
-      class="my-2 flex items-center gap-3 rounded-md bg-[white] dark:bg-dark-saturated-blue  py-3 pl-6 drop-shadow-sm"
+      class="my-2 flex  items-center gap-3 rounded-md bg-[white] dark:bg-dark-saturated-blue  py-3 pl-6 drop-shadow-sm"
       preventdefault:submit
       onSubmit$={() => {
         const input = document.getElementById("addTodo") as HTMLInputElement;
@@ -22,7 +22,7 @@ export const AddTodo = component$<AddTodoProps>(({ todos }) => {
       }}
     >
       <CheckMark clicked={false} />
-      <input id="addTodo" type="text" placeholder="Create a new todo..." />
+      <input class="dark:bg-dark-saturated-blue" id="addTodo" type="text" placeholder="Create a new todo..." />
     </form>
   );
 });
