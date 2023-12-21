@@ -4,6 +4,11 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
+dependencies:
+  '@fontsource/josefin-sans':
+    specifier: ^5.0.18
+    version: 5.0.18
+
 devDependencies:
   '@builder.io/qwik':
     specifier: ^1.2.19
@@ -353,6 +358,10 @@ packages:
     resolution: {integrity: sha512-+KpH+QxZU7O4675t3mnkQKcZZg56u+K/Ct2K+N2AZYNVK8kyeo/bI18tI8aPm3tvNNRyTWfj6s5tnGNlcbQRsA==}
     engines: {node: '>=14'}
     dev: true
+
+  /@fontsource/josefin-sans@5.0.18:
+    resolution: {integrity: sha512-+Jynrzvi+RpUwRO9tWdZxGPNToJD8WrrjWsN+me7VUzXi0F3o95W+3BqVnLMN3Gx/TaHPeGDdWNAcVF6No+nHw==}
+    dev: false
 
   /@humanwhocodes/config-array@0.11.13:
     resolution: {integrity: sha512-JSBDMiDKSzQVngfRjOdFXgFfklaXI4K9nLF49Auh21lmBWRLIK3+xTErTWD4KU54pb6coM6ESE7Awz/FNU3zgQ==}

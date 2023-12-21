@@ -4,6 +4,9 @@ module.exports = {
   darkMode: "class",
   theme: {
     extend: {
+      fontFamily: {
+      'josefin':[`Josefin Sans`,'Arial']
+      },
 colors: {
       "light-gray": "hsl(0, 0%, 98%)",
       "light-gray-blue": "hsl(236, 33%, 92%)",

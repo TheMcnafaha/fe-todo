@@ -5,7 +5,8 @@ import {
   ServiceWorkerRegister,
 } from "@builder.io/qwik-city";
 import { RouterHead } from "./components/router-head/router-head";
-
+import "@fontsource/josefin-sans/400.css"; 
+import "@fontsource/josefin-sans/700.css"; 
 import "./global.css";
 
 export default component$(() => {
@@ -33,7 +34,7 @@ const isDarkmode=window.matchMedia('(prefers-color-scheme: dark)').matches
       `}
         ></script>
         </head>
-      <body lang="en" class="bg-light-gray dark:bg-dark-blue flex flex-col items-center">
+      <body lang="en" class="bg-light-gray font-josefin dark:bg-dark-blue flex flex-col items-center">
         <RouterOutlet />
         <ServiceWorkerRegister />
       </body>
