@@ -15,7 +15,7 @@ export const onGet: RequestHandler = async ({ cacheControl }) => {
 export default component$(() => {
   return (
     <>
-      <img class="absolute -z-10" src="./public/bg-mobile-light.jpg" alt="" />
+<div class="bg-slate-400 bg-mobile-bg md:bg-desktop-bg md:max-w-full bg-cover max-w-sm w-full h-48 -z-10 absolute"> </div>
       <div class=" max-w-xs ">
         <header class=" flex font-bold justify-between  py-8 text-3xl tracking-widest text-[white]">
           <h1>TODO</h1>
@@ -39,3 +39,4 @@ console.log("change  theme");
     </>
   );
 });
+      <img class="absolute -z-10" src="./public/bg-mobile-light.jpg" alt="" />

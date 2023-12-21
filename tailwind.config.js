@@ -7,6 +7,10 @@ module.exports = {
       fontFamily: {
       'josefin':[`Josefin Sans`,'Arial']
       },
+      backgroundImage:{
+        'mobile-bg':"url('/bg-mobile-light.jpg')",
+        'desktop-bg':"url('/bg-desktop-light.jpg')",
+      },
 colors: {
       "light-gray": "hsl(0, 0%, 98%)",
       "light-gray-blue": "hsl(236, 33%, 92%)",
