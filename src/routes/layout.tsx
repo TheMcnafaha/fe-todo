@@ -16,7 +16,7 @@ export default component$(() => {
   return (
     <>
 <div class="bg-slate-400 bg-mobile-bg md:bg-desktop-bg md:max-w-full bg-cover max-w-sm w-full h-48 -z-10 absolute"> </div>
-      <div class=" max-w-xs ">
+      <div class=" max-w-xs md:max-w-md ">
         <header class=" flex font-bold justify-between  py-8 text-3xl tracking-widest text-[white]">
           <h1>TODO</h1>
           <a id="toggle-theme" onClick$={ ( ) => { 

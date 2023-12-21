@@ -28,17 +28,20 @@ export const Todos = component$<TodosProps>(({ todos }) => {
           {filteredTodos.value.map((todo, i, e) => {
             const className = getTodoClass(i);
             return (
-              <li key={todo.text} class={className}>
+              <li key={todo.text} class={className} onClick$={(e ) => { console.log("wizrad ", e.x, e.y); }} onMouseDown$={ (e) => { console.log("magic ",e);
+               }}  onMouseOut$={(e ) => { 
+                    console.log("goodbye ",e.target.innerText);
+                }}>
                 <Todo todo={todo} text={todo.text} todos={todos} />
               </li>
             );
           })}
         </ul>
-        <div class="flex dark:text-dark-gray-blue justify-between rounded-b-md  bg-[white] dark:bg-dark-saturated-blue px-2 py-3 drop-shadow-sm border-t-[1px] border-t-light-gray-blue dark:border-t-darker-gray-blue ">
+        <div class="flex text-light-hover-gray-blue justify-between rounded-b-md  bg-[white] dark:bg-dark-saturated-blue px-2 py-3 drop-shadow-sm border-t-[1px] border-t-light-gray-blue dark:border-t-darker-gray-blue ">
           <p>{itemsLeft} items left</p>
           <a onClick$={( ) => { 
 todos.value=todos.value.filter(todo=>todo.completed===false)
-          }}> <p> Clear Completed</p> </a>
+          }}> <p class="cursor-pointer hover:text-darker-gray-blue dark:hover:text-gray-hover-blue "> Clear Completed</p> </a>
           
         </div>
         </div>

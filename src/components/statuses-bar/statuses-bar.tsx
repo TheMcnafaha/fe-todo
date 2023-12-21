@@ -13,7 +13,7 @@ export const StatusesBar = component$<StatusesBarProps>(({status}) => {
         if (e.toLowerCase()===status.value) {
          return (
             <>
-         <div key={e} class=" text-bright-blue"> {e} </div>
+         <div key={e} class=" cursor-pointer text-bright-blue"> {e} </div>
             </>
          ) 
         }
@@ -25,6 +25,7 @@ const text=input.innerText.toLowerCase()  as TodoStatus
            status.value=text
           }}
 key={e}
+            class="cursor-pointer text-light-hover-gray-blue hover:text-darker-gray-blue dark:hover:text-gray-hover-blue "
           > {e}</div>
         )
       })}

@@ -11,7 +11,7 @@ export interface TodoProps {
 export const Todo = component$<TodoProps>(({ text, todo, todos }) => {
   const clicked = todo.completed
   const index=todos.value.indexOf(todo)
-  let className = " wrap flex w-full flex-wrap items-center gap-3 pl-6";
+  let className = " wrap cursor-pointer flex w-full flex-wrap items-center gap-3 pl-6";
   if (clicked) {
     className =
       "  wrap flex w-full dark:text-dark-gray-blue flex-wrap items-center gap-3 pl-6 line-through";
