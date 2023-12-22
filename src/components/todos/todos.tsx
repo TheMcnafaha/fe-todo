@@ -29,12 +29,18 @@ dragging.value=false
     const ul=document.getElementById("fav-ul")
     console.log(ul);
     ul!.addEventListener("mousedown", (e) => { 
+      dragging.value=true
       const favStrg=e.target.innerText
       const favId=todos.value.findIndex(todo=>todo.text===favStrg)
 console.log("her eig ",favId );
       console.log(favStrg);
-      
-})
+      })
+    ul.addEventListener("mousemove", (e) => { 
+      if (dragging.value) {
+        const lol=document.getElementById("lol")
+      lol?.style.top=e.y.toString()+"px"
+      }
+    })
     
   }))
   return (
@@ -42,7 +48,8 @@ console.log("her eig ",favId );
       <div class="mb-8">
         <div id="lol" class=" h-[24px] absolute w-full z-40 bg-red-500 rounded-full"></div>
         <div class="rounded-t-lg rounded-b-lg">
-<ul id="fav-ul" class=" rounded-md border-dark-gray-blue drop-shadow-sm"
+<ul id="fav-ul" class=" rounded-md border-dark-gray-blue drop-shadow-sm" 
+            preventdefault:drag
           >
           {filteredTodos.value.map((todo, i, e) => {
             const className = getTodoClass(i);
