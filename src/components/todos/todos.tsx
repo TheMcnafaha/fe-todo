@@ -6,9 +6,10 @@ import { StatusesBar } from "../statuses-bar/statuses-bar";
 export interface TodosProps {
   todos: Signal<TodoObj[]>;
 }
-
+type DragE=HTMLElement|undefined
 export type TodoStatus="completed"|"all"|"active"
 export const Todos = component$<TodosProps>(({ todos }) => {
+  const dragE=useSignal<DragE>(undefined)
   const dragging=useSignal(false)
   const status=useSignal<TodoStatus>("all")
   let filteredTodos=useComputed$( ( ) => { 
@@ -32,13 +33,21 @@ dragging.value=false
       dragging.value=true
       const favStrg=e.target.innerText
       const favId=todos.value.findIndex(todo=>todo.text===favStrg)
+      const targetTodo=document.getElementById(todos.value[favId].id.toString())
+      targetTodo!.style="bg-[white] z-40 dark:bg-dark-saturated-blue py-3 w-full border-t-[1px] border-t-light-gray-blue dark:border-t-darker-gray-blue"
+      targetTodo!.style.position="absolute"
+      // targetTodo!.style.zIndex="100"
 console.log("her eig ",favId );
       console.log(favStrg);
       })
-    ul.addEventListener("mousemove", (e) => { 
+    ul!.addEventListener("mousemove", (e) => { 
       if (dragging.value) {
         const lol=document.getElementById("lol")
-      lol?.style.top=e.y.toString()+"px"
+      const favStrg=e.target.innerText
+      const favId=todos.value.findIndex(todo=>todo.text===favStrg)
+      const targetTodo=document.getElementById(todos.value[favId].id.toString())
+      targetTodo!.style.top=e.y.toString()+"px"
+      // lol!.style.top=e.y.toString()+"px"
       }
     })
     
@@ -54,7 +63,7 @@ console.log("her eig ",favId );
           {filteredTodos.value.map((todo, i, e) => {
             const className = getTodoClass(i);
             return (
-              <li key={todo.text} class={className}  id={i.toString()} onClick$={(e ) => { console.log("wizrad ", e.x, e.y); }} 
+              <li key={todo.text} class={className}  id={todo.id.toString()} onClick$={(e ) => { console.log("wizrad ", e.x, e.y); }} 
                   onMouseUp$={ ( e) => { 
                     dragging.value=false
                     console.log("letting gooooo");

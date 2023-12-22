@@ -7,13 +7,14 @@ import { Todos } from "~/components/todos/todos";
 export type TodoObj={
   text:string,
   completed:boolean
+  id:number;
 }
 const defaultTodos:TodoObj[] = [
-{text:  "Jog around the park 3x",completed:true},
-{text:  "10 minutes meditation",completed:false},
-  {text:  "Read for 1 hour",completed:true},
-  {text:  "Pick up groceries",completed:false},
-    {text:  "Complete Todo App on Frontend Mentor 💀💀💀",completed:false},
+{text:  "Jog around the park 3x",completed:true, id:1234},
+{text:  "10 minutes meditation",completed:false,id:2345},
+  {text:  "Read for 1 hour",completed:true,id:3456},
+  {text:  "Pick up groceries",completed:false,id:4567},
+    {text:  "Complete Todo App on Frontend Mentor 💀💀💀",completed:false,id:5678},
 ];
 export default component$(() => {
   const todos = useSignal<TodoObj[]>(defaultTodos);
