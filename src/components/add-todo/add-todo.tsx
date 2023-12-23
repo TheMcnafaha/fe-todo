@@ -14,9 +14,11 @@ export const AddTodo = component$<AddTodoProps>(({ todos }) => {
       onSubmit$={() => {
         const input = document.getElementById("addTodo") as HTMLInputElement;
         const text = input.value;
+        const randFourDig=Math.floor(Math.random()*10000)
         if (text !== "") {
-          todos.value = [...todos.value, {text:text,completed:false}];
+          todos.value = [...todos.value, {text:text,completed:false,id:randFourDig}];
           input.value = "";
+          localStorage.setItem("todos",JSON.stringify(todos.value))
         }
         console.log("submitted: ", text);
       }}

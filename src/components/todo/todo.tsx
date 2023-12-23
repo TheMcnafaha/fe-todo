@@ -39,6 +39,7 @@ export const Todo = component$<TodoProps>(({ text, todo, todos }) => {
         onClick$={() => {
           const goodTodo = todos.value.filter((e, i) => i !== index);
           todos.value = goodTodo;
+          localStorage.setItem("todos",JSON.stringify(goodTodo))
         }}
       >
         <img src="/icon-cross.svg" alt="" />

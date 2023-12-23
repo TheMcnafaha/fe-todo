@@ -10,6 +10,8 @@ module.exports = {
       backgroundImage:{
         'mobile-bg':"url('/bg-mobile-light.jpg')",
         'desktop-bg':"url('/bg-desktop-light.jpg')",
+        'dark-mobile-bg':"url('/bg-mobile-dark.jpg')",
+        'dark-desktop-bg':"url('/bg-desktop-dark.jpg')",
       },
 colors: {
       "light-gray": "hsl(0, 0%, 98%)",

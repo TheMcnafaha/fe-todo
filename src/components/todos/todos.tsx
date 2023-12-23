@@ -1,16 +1,14 @@
-import { Signal, component$,$, useComputed$, useOnDocument, useSignal, useTask$ } from "@builder.io/qwik";
+import { Signal, component$,$, useComputed$, useOnDocument, useSignal, useTask$, useVisibleTask$ } from "@builder.io/qwik";
 import { Todo } from "../todo/todo";
 import { TodoObj } from "~/routes";
 import { StatusesBar } from "../statuses-bar/statuses-bar";
+import { json } from "stream/consumers";
 
 export interface TodosProps {
   todos: Signal<TodoObj[]>;
 }
-type DragE=HTMLElement|undefined
 export type TodoStatus="completed"|"all"|"active"
 export const Todos = component$<TodosProps>(({ todos }) => {
-  const dragE=useSignal<DragE>(undefined)
-  const dragging=useSignal(false)
   const status=useSignal<TodoStatus>("all")
   let filteredTodos=useComputed$( ( ) => { 
     if (status.value==="all") {
@@ -22,53 +20,27 @@ export const Todos = component$<TodosProps>(({ todos }) => {
     return todos.value.filter(todo=>todo.completed)
   })
   const itemsLeft=filteredTodos.value.length 
-  useOnDocument("load",$( ( ) => { 
-document.addEventListener("mouseup", (  ) => { 
-console.log("lol lil bro thinks he can program");
-dragging.value=false
-    })
-    const ul=document.getElementById("fav-ul")
-    console.log(ul);
-    ul!.addEventListener("mousedown", (e) => { 
-      dragging.value=true
-      const favStrg=e.target.innerText
-      const favId=todos.value.findIndex(todo=>todo.text===favStrg)
-      const targetTodo=document.getElementById(todos.value[favId].id.toString())
-      targetTodo!.style="bg-[white] z-40 dark:bg-dark-saturated-blue py-3 w-full border-t-[1px] border-t-light-gray-blue dark:border-t-darker-gray-blue"
-      targetTodo!.style.position="absolute"
-      // targetTodo!.style.zIndex="100"
-console.log("her eig ",favId );
-      console.log(favStrg);
-      })
-    ul!.addEventListener("mousemove", (e) => { 
-      if (dragging.value) {
-        const lol=document.getElementById("lol")
-      const favStrg=e.target.innerText
-      const favId=todos.value.findIndex(todo=>todo.text===favStrg)
-      const targetTodo=document.getElementById(todos.value[favId].id.toString())
-      targetTodo!.style.top=e.y.toString()+"px"
-      // lol!.style.top=e.y.toString()+"px"
-      }
-    })
-    
-  }))
+  useVisibleTask$( () => { 
+    const savedTodos=localStorage.getItem("todos")
+    if (savedTodos===null) {
+     localStorage.setItem("todos",JSON.stringify(todos.value)) 
+      return
+    }else{
+      const maybe=localStorage.getItem("todos") as string
+      const yes=JSON.parse(maybe)
+      todos.value=yes
+    }
+  })
   return (
     <>
       <div class="mb-8">
-        <div id="lol" class=" h-[24px] absolute w-full z-40 bg-red-500 rounded-full"></div>
         <div class="rounded-t-lg rounded-b-lg">
 <ul id="fav-ul" class=" rounded-md border-dark-gray-blue drop-shadow-sm" 
-            preventdefault:drag
           >
           {filteredTodos.value.map((todo, i, e) => {
             const className = getTodoClass(i);
             return (
-              <li key={todo.text} class={className}  id={todo.id.toString()} onClick$={(e ) => { console.log("wizrad ", e.x, e.y); }} 
-                  onMouseUp$={ ( e) => { 
-                    dragging.value=false
-                    console.log("letting gooooo");
-                    
-                  }}>
+              <li key={todo.text} class={className}  id={todo.id.toString()}>
                 <Todo todo={todo} text={todo.text} todos={todos} />
               </li>
             );

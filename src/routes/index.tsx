@@ -1,4 +1,4 @@
-import { component$, useSignal } from "@builder.io/qwik";
+import { component$, useSignal, useVisibleTask$ } from "@builder.io/qwik";
 import type { DocumentHead } from "@builder.io/qwik-city";
 import { AddTodo } from "~/components/add-todo/add-todo";
 import { StatusesBar } from "~/components/statuses-bar/statuses-bar";
@@ -18,6 +18,17 @@ const defaultTodos:TodoObj[] = [
 ];
 export default component$(() => {
   const todos = useSignal<TodoObj[]>(defaultTodos);
+  useVisibleTask$( ( ) => { 
+ const savedTodos=localStorage.getItem("todos")
+    if (savedTodos===null) {
+     localStorage.setItem("todos",JSON.stringify(todos.value)) 
+      return
+    }else{
+      const maybe=localStorage.getItem("todos") as string
+      const yes=JSON.parse(maybe)
+      todos.value=yes
+    }
+  })
   return (
     <>
 <AddTodo todos={todos} />
