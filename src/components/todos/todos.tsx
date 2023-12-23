@@ -20,22 +20,11 @@ export const Todos = component$<TodosProps>(({ todos }) => {
     return todos.value.filter(todo=>todo.completed)
   })
   const itemsLeft=filteredTodos.value.length 
-  useVisibleTask$( () => { 
-    const savedTodos=localStorage.getItem("todos")
-    if (savedTodos===null) {
-     localStorage.setItem("todos",JSON.stringify(todos.value)) 
-      return
-    }else{
-      const maybe=localStorage.getItem("todos") as string
-      const yes=JSON.parse(maybe)
-      todos.value=yes
-    }
-  })
   return (
     <>
       <div class="mb-8">
         <div class="rounded-t-lg rounded-b-lg">
-<ul id="fav-ul" class=" rounded-md border-dark-gray-blue drop-shadow-sm" 
+<ul id="fav-ul" class="rounded-md border-dark-gray-blue drop-shadow-sm" 
           >
           {filteredTodos.value.map((todo, i, e) => {
             const className = getTodoClass(i);

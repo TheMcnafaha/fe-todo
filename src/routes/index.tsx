@@ -18,6 +18,7 @@ const defaultTodos:TodoObj[] = [
 ];
 export default component$(() => {
   const todos = useSignal<TodoObj[]>(defaultTodos);
+  const checked=useSignal(false)
   useVisibleTask$( ( ) => { 
  const savedTodos=localStorage.getItem("todos")
     if (savedTodos===null) {
@@ -28,11 +29,12 @@ export default component$(() => {
       const yes=JSON.parse(maybe)
       todos.value=yes
     }
+    checked.value=true
   })
   return (
     <>
 <AddTodo todos={todos} />
-<Todos todos={todos} />
+      {checked.value?<Todos todos={todos}/>: <div class="invisible bg-gray-600"><Todos todos={todos}/></div> }
     </>
   );
 });
