@@ -15,28 +15,15 @@ export const onGet: RequestHandler = async ({ cacheControl }) => {
 export default component$(() => {
   return (
     <>
-<div class="bg-slate-400 bg-mobile-bg dark:bg-dark-mobile-bg md:bg-desktop-bg dark:md:bg-dark-desktop-bg md:max-w-full bg-cover max-w-sm w-full h-48 -z-10 absolute"> </div>
+      <div class="absolute -z-10 h-48 w-full max-w-sm bg-slate-400 bg-mobile-bg bg-cover dark:bg-dark-mobile-bg md:max-w-full md:bg-desktop-bg dark:md:bg-dark-desktop-bg">
+        {" "}
+      </div>
       <div class=" max-w-xs md:max-w-md ">
-        <header class=" flex font-bold justify-between  py-8 text-3xl tracking-widest text-[white]">
-          <h1>TODO</h1>
-          <a id="toggle-theme" onClick$={ ( ) => { 
-console.log("change  theme");
-            document.querySelector("html")?.classList.toggle("dark")
-}} >
-            <div id="theme-img"> 
-<img class="dark:hidden block" src="/icon-sun.svg" alt="" />
-<img class="hidden dark:block" src="/icon-moon.svg" alt="" />
-            </div>
-          </a>
-        </header>
         <main class="dark:text-grey-blue">
           <Slot />
         </main>
-        <footer class="mt-10 flex justify-center bg-light-gray dark:bg-dark-blue dark:text-dark-gray-blue text-light-hover-gray-blue">
-          Drag and drop to reorder list
-        </footer>
       </div>
     </>
   );
 });
-      <img class="absolute -z-10" src="./public/bg-mobile-light.jpg" alt="" />
+<img class="absolute -z-10" src="./public/bg-mobile-light.jpg" alt="" />;
