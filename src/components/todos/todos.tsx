@@ -12,6 +12,7 @@ import { Todo } from "../todo/todo";
 import { TodoObj } from "~/routes";
 import { StatusesBar } from "../statuses-bar/statuses-bar";
 import { json } from "stream/consumers";
+import { loadavg } from "os";
 
 export interface TodosProps {
   todos: Signal<TodoObj[]>;
@@ -19,6 +20,8 @@ export interface TodosProps {
 export type TodoStatus = "completed" | "all" | "active";
 export const Todos = component$<TodosProps>(({ todos }) => {
   const status = useSignal<TodoStatus>("all");
+  const yAxis = useSignal(0);
+  const idx = useSignal(0);
   let filteredTodos = useComputed$(() => {
     if (status.value === "all") {
       return todos.value;
@@ -46,7 +49,56 @@ export const Todos = component$<TodosProps>(({ todos }) => {
                   class={className}
                   id={todo.id.toString()}
                   onDragStart$={(e) => {
-                    e.style.border = "none";
+                    yAxis.value = e.clientY;
+                    idx.value = i;
+                    console.log("lol hlkdsajflkaj, ", yAxis.value);
+                  }}
+                  onDragOver$={(e) => {
+                    const xd = document.elementsFromPoint(e.clientX, e.clientY);
+                    const magic = xd.find((elem) => /[0-9]+/.test(elem.id));
+                    const targetId = Number(magic!.id);
+                    const targetTodoIdx = todos.value.findIndex(
+                      (todo) => todo.id === targetId,
+                    );
+                    console.log(" hehe ", xd);
+                    console.log(
+                      "pure magic ",
+                      magic!.id,
+                      targetTodoIdx,
+                      idx.value,
+                    );
+                    if (idx.value != targetTodoIdx) {
+                      // const swapped = todos.value;
+                      // const tmp = swapped[idx.value];
+                      // swapped[idx.value] = swapped[targetTodoIdx];
+                      // swapped[targetTodoIdx] = tmp;
+                      // todos.value = swapped;
+                    }
+                  }}
+                  onDragEnd$={(e) => {
+                    console.log("we over");
+                    const xd = document.elementsFromPoint(e.clientX, e.clientY);
+                    const magic = xd.find((elem) => /[0-9]+/.test(elem.id));
+                    const targetId = Number(magic!.id);
+                    const targetTodoIdx = todos.value.findIndex(
+                      (todo) => todo.id === targetId,
+                    );
+                    console.log(" hehe ", xd);
+                    console.log(
+                      "pure magic ",
+                      magic!.id,
+                      targetTodoIdx,
+                      idx.value,
+                    );
+                    if (idx.value != targetTodoIdx) {
+                      console.log("different stuff ");
+                      const tmp = todos.value[idx.value];
+                      const placeHolder = [...todos.value];
+                      placeHolder.splice(idx.value, 1);
+                      placeHolder.splice(targetTodoIdx, 0, tmp);
+                      console.log("spliced ", placeHolder);
+                      todos.value = placeHolder;
+                    }
                   }}
                 >
                   <Todo todo={todo} text={todo.text} todos={todos} />
