@@ -40,7 +40,15 @@ export const Todos = component$<TodosProps>(({ todos }) => {
             {filteredTodos.value.map((todo, i, e) => {
               const className = getTodoClass(i);
               return (
-                <li key={todo.text} class={className} id={todo.id.toString()}>
+                <li
+                  draggable={true}
+                  key={todo.text}
+                  class={className}
+                  id={todo.id.toString()}
+                  onDragStart$={(e) => {
+                    e.style.border = "none";
+                  }}
+                >
                   <Todo todo={todo} text={todo.text} todos={todos} />
                 </li>
               );
