@@ -44,7 +44,10 @@ export const Todos = component$<TodosProps>(({ todos }) => {
                   key={todo.text}
                   class={className}
                   id={todo.id.toString()}
-                  onDragStart$={(e) => {
+                  onDragStart$={(e: QwikDragEvent) => {
+                    const dragID = (e.target as HTMLElement).id;
+                    const draggedE = document.getElementById(dragID);
+                    draggedE?.classList.toggle("opacity-40");
                     yAxis.value = e.clientY;
                     idx.value = i;
                   }}
@@ -64,6 +67,9 @@ export const Todos = component$<TodosProps>(({ todos }) => {
                     }
                   }}
                   onDragEnd$={(e) => {
+                    const dragID = (e.target as HTMLElement).id;
+                    const draggedE = document.getElementById(dragID);
+                    draggedE?.classList.toggle("opacity-40");
                     const xd = document.elementsFromPoint(e.clientX, e.clientY);
                     const magic = xd.find((elem) => /[0-9]+/.test(elem.id));
                     const targetId = Number(magic!.id);
