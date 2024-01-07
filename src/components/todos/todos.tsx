@@ -1,19 +1,13 @@
 import {
   Signal,
   component$,
-  $,
   useComputed$,
-  useOnDocument,
   useSignal,
-  useTask$,
-  useVisibleTask$,
+  QwikDragEvent,
 } from "@builder.io/qwik";
 import { Todo } from "../todo/todo";
 import { TodoObj } from "~/routes";
 import { StatusesBar } from "../statuses-bar/statuses-bar";
-import { json } from "stream/consumers";
-import { loadavg } from "os";
-
 export interface TodosProps {
   todos: Signal<TodoObj[]>;
 }
@@ -41,14 +35,11 @@ export const Todos = component$<TodosProps>(({ todos }) => {
             preventdefault:drop
             id="fav-ul"
             class="rounded-md border-dark-gray-blue drop-shadow-sm"
-            onDrop$={(e) => {
-              dropHandler(e);
-            }}
             onDragOver$={(e) => {
               dragoverHandler(e);
             }}
           >
-            {filteredTodos.value.map((todo, i, e) => {
+            {filteredTodos.value.map((todo, i) => {
               const className = getTodoClass(i);
               return (
                 <li
@@ -132,13 +123,8 @@ function getTodoClass(index: number): string {
     "bg-[white] dark:bg-dark-saturated-blue py-3 w-full border-t-[1px] border-t-light-gray-blue dark:border-t-darker-gray-blue";
   return className;
 }
-function dragoverHandler(ev: HTMLElement) {
+function dragoverHandler(ev: QwikDragEvent) {
   ev.dataTransfer.dropEffect = "move";
-}
-function dropHandler(ev: HTMLElement) {
-  // Get the id of the target and add the moved element to the target's DOM
-  const data = ev.dataTransfer.getData("text/plain");
-  ev.target.appendChild(document.getElementById(data));
 }
 //    onMouseDown$={ (e) => {
 //      if (dragging.value) {
