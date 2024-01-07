@@ -37,8 +37,16 @@ export const Todos = component$<TodosProps>(({ todos }) => {
       <div class="mb-8">
         <div class="rounded-b-lg rounded-t-lg">
           <ul
+            preventdefault:dragover
+            preventdefault:drop
             id="fav-ul"
             class="rounded-md border-dark-gray-blue drop-shadow-sm"
+            onDrop$={(e) => {
+              dropHandler(e);
+            }}
+            onDragOver$={(e) => {
+              dragoverHandler(e);
+            }}
           >
             {filteredTodos.value.map((todo, i, e) => {
               const className = getTodoClass(i);
@@ -141,6 +149,14 @@ function getTodoClass(index: number): string {
   const className =
     "bg-[white] dark:bg-dark-saturated-blue py-3 w-full border-t-[1px] border-t-light-gray-blue dark:border-t-darker-gray-blue";
   return className;
+}
+function dragoverHandler(ev: HTMLElement) {
+  ev.dataTransfer.dropEffect = "move";
+}
+function dropHandler(ev: HTMLElement) {
+  // Get the id of the target and add the moved element to the target's DOM
+  const data = ev.dataTransfer.getData("text/plain");
+  ev.target.appendChild(document.getElementById(data));
 }
 //    onMouseDown$={ (e) => {
 //      if (dragging.value) {
