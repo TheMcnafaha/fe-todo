@@ -15,6 +15,7 @@ export type TodoStatus = "completed" | "all" | "active";
 export const Todos = component$<TodosProps>(({ todos }) => {
   const status = useSignal<TodoStatus>("all");
   const idx = useSignal(0);
+  const prevID = useSignal(-1);
   let filteredTodos = useComputed$(() => {
     if (status.value === "all") {
       return todos.value;
@@ -34,6 +35,22 @@ export const Todos = component$<TodosProps>(({ todos }) => {
             preventdefault:drop
             id="fav-ul"
             class="rounded-md border-dark-gray-blue drop-shadow-sm"
+            onDragOver$={(e) => {
+              const targetID = e.target.id;
+              if (prevID.value !== targetID) {
+                if (prevID.value == -1) {
+                  const currentE = document.getElementById(targetID);
+                  const className = "bg-red-500";
+                  currentE?.classList.add("bg-red-500");
+                  prevID.value = targetID;
+                  return;
+                }
+                const oldE = document.getElementById(prevID.value.toString());
+                console.log("new element lol ", prevID.value, oldE);
+                prevID.value = targetID === "" ? prevID.value : targetID;
+              }
+              console.log("me here ", targetID);
+            }}
           >
             {filteredTodos.value.map((todo, i) => {
               const className = getTodoClass(i);
