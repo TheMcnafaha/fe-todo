@@ -51,10 +51,31 @@ export const Todos = component$<TodosProps>(({ todos }) => {
                   return;
                 }
                 const oldE = document.getElementById(prevID.value.toString());
+                const className = oldE!.classList.value.replace(
+                  "bg-red-500",
+                  "bg-[white] dark:bg-dark-saturated-blue",
+                );
+                oldE!.classList.value = className;
                 console.log("new element lol ", prevID.value, oldE);
                 prevID.value = targetID === "" ? prevID.value : targetID;
+                const currentE = document.getElementById(targetID);
+                console.log("lol xddd ", currentE?.classList.value);
+                const className2 = currentE!.classList.value.replace(
+                  /bg-\[white\] dark:bg-dark-saturated-blue/,
+                  "bg-red-500",
+                );
+                currentE!.classList.value = className2;
               }
               console.log("me here ", targetID);
+            }}
+            onDrop$={(e) => {
+              const targetID = e.target.id;
+              const currentE = document.getElementById(targetID);
+              const className = currentE!.classList.value.replace(
+                "bg-red-500",
+                "bg-[white] dark:bg-dark-saturated-blue",
+              );
+              currentE!.classList.value = className;
             }}
           >
             {filteredTodos.value.map((todo, i) => {
