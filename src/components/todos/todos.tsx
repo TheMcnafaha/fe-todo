@@ -35,9 +35,6 @@ export const Todos = component$<TodosProps>(({ todos }) => {
             preventdefault:drop
             id="fav-ul"
             class="rounded-md border-dark-gray-blue drop-shadow-sm"
-            onDragOver$={(e) => {
-              dragoverHandler(e);
-            }}
           >
             {filteredTodos.value.map((todo, i) => {
               const className = getTodoClass(i);
@@ -122,9 +119,6 @@ function getTodoClass(index: number): string {
   const className =
     "bg-[white] dark:bg-dark-saturated-blue py-3 w-full border-t-[1px] border-t-light-gray-blue dark:border-t-darker-gray-blue";
   return className;
-}
-function dragoverHandler(ev: QwikDragEvent) {
-  ev.dataTransfer.dropEffect = "move";
 }
 //    onMouseDown$={ (e) => {
 //      if (dragging.value) {
