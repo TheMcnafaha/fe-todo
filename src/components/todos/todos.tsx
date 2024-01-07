@@ -46,12 +46,11 @@ export const Todos = component$<TodosProps>(({ todos }) => {
                     /bg-\[white\] dark:bg-dark-saturated-blue/,
                     "bg-red-500",
                   );
-                  currentE?.classList.value = className;
+                  currentE!.classList.value = className;
                   console.log("lol xddd2222 ", currentE?.classList.value);
                   return;
                 }
                 const oldE = document.getElementById(prevID.value.toString());
-                oldE!.classList.toggle("");
                 console.log("new element lol ", prevID.value, oldE);
                 prevID.value = targetID === "" ? prevID.value : targetID;
               }
