@@ -37,15 +37,21 @@ export const Todos = component$<TodosProps>(({ todos }) => {
             class="rounded-md border-dark-gray-blue drop-shadow-sm"
             onDragOver$={(e) => {
               const targetID = e.target.id;
-              if (prevID.value !== targetID) {
+              if (prevID.value !== targetID && targetID !== "") {
                 if (prevID.value == -1) {
-                  const currentE = document.getElementById(targetID);
-                  const className = "bg-red-500";
-                  currentE?.classList.add("bg-red-500");
                   prevID.value = targetID;
+                  const currentE = document.getElementById(targetID);
+                  console.log("lol xddd ", currentE?.classList.value);
+                  const className = currentE!.classList.value.replace(
+                    /bg-\[white\] dark:bg-dark-saturated-blue/,
+                    "bg-red-500",
+                  );
+                  currentE?.classList.value = className;
+                  console.log("lol xddd2222 ", currentE?.classList.value);
                   return;
                 }
                 const oldE = document.getElementById(prevID.value.toString());
+                oldE!.classList.toggle("");
                 console.log("new element lol ", prevID.value, oldE);
                 prevID.value = targetID === "" ? prevID.value : targetID;
               }
