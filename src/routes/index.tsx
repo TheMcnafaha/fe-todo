@@ -54,7 +54,6 @@ export default component$(() => {
           </a>
         </header>
       )}
-      <p>{JSON.stringify(todos.value)}</p>
       {checked.value && <AddTodo todos={todos} />}
       {checked.value && <Todos todos={todos} />}{" "}
     </>
