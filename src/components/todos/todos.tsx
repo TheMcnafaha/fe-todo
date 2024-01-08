@@ -68,9 +68,8 @@ export const Todos = component$<TodosProps>(({ todos }) => {
               }
               console.log("me here ", targetID);
             }}
-            onDrop$={(e) => {
-              const targetID = e.target.id;
-              const currentE = document.getElementById(targetID);
+            onDrop$={() => {
+              const currentE = document.getElementById(prevID.value.toString());
               const className = currentE!.classList.value.replace(
                 "bg-red-500",
                 "bg-[white] dark:bg-dark-saturated-blue",
