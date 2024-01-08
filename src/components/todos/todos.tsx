@@ -41,13 +41,11 @@ export const Todos = component$<TodosProps>(({ todos }) => {
                 if (prevID.value == -1) {
                   prevID.value = targetID;
                   const currentE = document.getElementById(targetID);
-                  console.log("lol xddd ", currentE?.classList.value);
                   const className = currentE!.classList.value.replace(
                     /bg-\[white\] dark:bg-dark-saturated-blue/,
                     "bg-violet-300 dark:bg-sky-700",
                   );
                   currentE!.classList.value = className;
-                  console.log("lol xddd2222 ", currentE?.classList.value);
                   return;
                 }
                 const oldE = document.getElementById(prevID.value.toString());
@@ -56,17 +54,14 @@ export const Todos = component$<TodosProps>(({ todos }) => {
                   "bg-[white] dark:bg-dark-saturated-blue",
                 );
                 oldE!.classList.value = className;
-                console.log("new element lol ", prevID.value, oldE);
                 prevID.value = targetID === "" ? prevID.value : targetID;
                 const currentE = document.getElementById(targetID);
-                console.log("lol xddd ", currentE?.classList.value);
                 const className2 = currentE!.classList.value.replace(
                   /bg-\[white\] dark:bg-dark-saturated-blue/,
                   "bg-violet-300 dark:bg-sky-700",
                 );
                 currentE!.classList.value = className2;
               }
-              console.log("me here ", targetID);
             }}
             onDrop$={() => {
               const currentE = document.getElementById(prevID.value.toString());
