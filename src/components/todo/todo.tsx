@@ -1,4 +1,4 @@
-import { Signal, component$, useSignal } from "@builder.io/qwik";
+import { Signal, component$ } from "@builder.io/qwik";
 import { CheckMark } from "../check-mark/check-mark";
 import { TodoObj } from "~/routes";
 

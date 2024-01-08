@@ -1,12 +1,12 @@
-import { component$, useSignal } from "@builder.io/qwik";
+import { component$ } from "@builder.io/qwik";
 import {
   QwikCityProvider,
   RouterOutlet,
   ServiceWorkerRegister,
 } from "@builder.io/qwik-city";
 import { RouterHead } from "./components/router-head/router-head";
-import "@fontsource/josefin-sans/400.css"; 
-import "@fontsource/josefin-sans/700.css"; 
+import "@fontsource/josefin-sans/400.css";
+import "@fontsource/josefin-sans/700.css";
 import "./global.css";
 
 export default component$(() => {
@@ -23,7 +23,7 @@ export default component$(() => {
         <meta charSet="utf-8" />
         <link rel="manifest" href="/manifest.json" />
         <RouterHead />
-<script
+        <script
           dangerouslySetInnerHTML={`
         (function() {
 const isDarkmode=window.matchMedia('(prefers-color-scheme: dark)').matches
@@ -33,8 +33,11 @@ const isDarkmode=window.matchMedia('(prefers-color-scheme: dark)').matches
         })();
       `}
         ></script>
-        </head>
-      <body lang="en" class="bg-light-gray font-josefin dark:bg-dark-blue flex flex-col items-center">
+      </head>
+      <body
+        lang="en"
+        class="flex flex-col items-center bg-light-gray font-josefin dark:bg-dark-blue"
+      >
         <RouterOutlet />
         <ServiceWorkerRegister />
       </body>
