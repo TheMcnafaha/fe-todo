@@ -1,241 +1,107 @@
-# Qwik City App ⚡️
+# Frontend Mentor - Todo app solution
 
-- [Qwik Docs](https://qwik.builder.io/)
-- [Discord](https://qwik.builder.io/chat)
-- [Qwik GitHub](https://github.com/BuilderIO/qwik)
-- [@QwikDev](https://twitter.com/QwikDev)
-- [Vite](https://vitejs.dev/)
+This is a solution to the [Todo app challenge on Frontend Mentor](https://www.frontendmentor.io/challenges/todo-app-Su1_KokOW). Frontend Mentor challenges help you improve your coding skills by building realistic projects.
 
----
+## Table of contents
 
-## Project Structure
+- [Overview](#overview)
+  - [The challenge](#the-challenge)
+  - [Screenshot](#screenshot)
+  - [Links](#links)
+- [My process](#my-process)
+  - [Built with](#built-with)
+  - [What I learned](#what-i-learned)
+  - [Continued development](#continued-development)
+  - [Useful resources](#useful-resources)
+- [Author](#author)
+- [Acknowledgments](#acknowledgments)
 
-This project is using Qwik with [QwikCity](https://qwik.builder.io/qwikcity/overview/). QwikCity is just an extra set of tools on top of Qwik to make it easier to build a full site, including directory-based routing, layouts, and more.
+**Note: Delete this note and update the table of contents based on what sections you keep.**
 
-Inside your project, you'll see the following directory structure:
+## Overview
 
-```
-├── public/
-│   └── ...
-└── src/
-    ├── components/
-    │   └── ...
-    └── routes/
-        └── ...
-```
+### The challenge
 
-- `src/routes`: Provides the directory-based routing, which can include a hierarchy of `layout.tsx` layout files, and an `index.tsx` file as the page. Additionally, `index.ts` files are endpoints. Please see the [routing docs](https://qwik.builder.io/qwikcity/routing/overview/) for more info.
+Users should be able to:
 
-- `src/components`: Recommended directory for components.
+- View the optimal layout for the app depending on their device's screen size
+- See hover states for all interactive elements on the page
+- Add new todos to the list
+- Mark todos as complete
+- Delete todos from the list
+- Filter by all/active/complete todos
+- Clear all completed todos
+- Toggle light and dark mode
+- **Bonus**: Drag and drop to reorder items on the list
 
-- `public`: Any static assets, like images, can be placed in the public directory. Please see the [Vite public directory](https://vitejs.dev/guide/assets.html#the-public-directory) for more info.
+### Screenshot
 
-## Add Integrations and deployment
+![](./todo-main.png)
 
-Use the `pnpm qwik add` command to add additional integrations. Some examples of integrations includes: Cloudflare, Netlify or Express Server, and the [Static Site Generator (SSG)](https://qwik.builder.io/qwikcity/guides/static-site-generation/).
+### Links
 
-```shell
-pnpm qwik add # or `pnpm qwik add`
-```
+- Solution URL: [here](https://github.com/TheMcnafaha/fe-todo)
+- Live Site URL: [here](https://fe-todo-ruby.vercel.app/)
 
-## Development
+## My process
 
-Development mode uses [Vite's development server](https://vitejs.dev/). The `dev` command will server-side render (SSR) the output during development.
+### Built with
 
-```shell
-npm start # or `pnpm start`
-```
+- Semantic HTML5 markup
+- Drag & Drop API
+- Flexbox
+- CSS Grid
+- Mobile-first workflow
+- [Qwik](https://qwik.builder.io/) - TS framework
+- [Tailwind](https://tailwindcss.com/) - Tailwind framework
 
-> Note: during dev mode, Vite may request a significant number of `.js` files. This does not represent a Qwik production build.
+### What I learned
 
-## Preview
+By far, the biggest piece of information that I got from this challenge was using the Drag & Drop (D&D) API. It has some quirks, but if applied porperly, can do things that JS script can match, while retaining mobile support.
 
-The preview command will create a production build of the client modules, a production build of `src/entry.preview.tsx`, and run a local server. The preview server is only for convenience to preview a production build locally and should not be used as a production server.
+Below is the neccesary code (sorry for the regex) to do some "drop-hover" effects using only the D&D API:
 
-```shell
-pnpm preview # or `pnpm preview`
-```
-
-## Production
-
-The production build will generate client and server modules by running both client and server build commands. The build command will use Typescript to run a type check on the source code.
-
-```shell
-pnpm build # or `pnpm build`
-```
-
-## Vercel Edge
-
-This starter site is configured to deploy to [Vercel Edge Functions](https://vercel.com/docs/concepts/functions/edge-functions), which means it will be rendered at an edge location near to your users.
-
-## Installation
-
-The adaptor will add a new `vite.config.ts` within the `adapters/` directory, and a new entry file will be created, such as:
-
-```
-└── adapters/
-    └── vercel-edge/
-        └── vite.config.ts
-└── src/
-    └── entry.vercel-edge.tsx
-```
-
-Additionally, within the `package.json`, the `build.server` script will be updated with the Vercel Edge build.
-
-## Production build
-
-To build the application for production, use the `build` command, this command will automatically run `pnpm build.server` and `pnpm build.client`:
-
-```shell
-pnpm build
-```
-
-[Read the full guide here](https://github.com/BuilderIO/qwik/blob/main/starters/adapters/vercel-edge/README.md)
-
-## Dev deploy
-
-To deploy the application for development:
-
-```shell
-pnpm deploy
+```js
+(e) => {
+              const targetID = (e.target as HTMLElement).id;
+              if (prevID.value !== targetID && targetID !== "") {
+                if (prevID.value === "") {
+                  prevID.value = targetID;
+                  const currentE = document.getElementById(targetID);
+                  const className = currentE!.classList.value.replace(
+                    /bg-\[white\] dark:bg-dark-saturated-blue/,
+                    "bg-violet-300 dark:bg-sky-700",
+                  );
+                  currentE!.classList.value = className;
+                  return;
+                }
+                const oldE = document.getElementById(prevID.value.toString());
+                const className = oldE!.classList.value.replace(
+                  "bg-violet-300 dark:bg-sky-700",
+                  "bg-[white] dark:bg-dark-saturated-blue",
+                );
+                oldE!.classList.value = className;
+                prevID.value = targetID === "" ? prevID.value : targetID;
+                const currentE = document.getElementById(targetID);
+                const className2 = currentE!.classList.value.replace(
+                  /bg-\[white\] dark:bg-dark-saturated-blue/,
+                  "bg-violet-300 dark:bg-sky-700",
+                );
+                currentE!.classList.value = className2;
+              }
+            }
 ```
 
-Notice that you might need a [Vercel account](https://docs.Vercel.com/get-started/) in order to complete this step!
+### Continued development
 
-## Production deploy
+My project is not fully exploring the D&D API. Currently, it has no "cross-window" capabilities.
 
-The project is ready to be deployed to Vercel. However, you will need to create a git repository and push the code to it.
+In the future, I want users to be able to make todos by dragging text into the list from a different window.
 
-You can [deploy your site to Vercel](https://vercel.com/docs/concepts/deployments/overview) either via a Git provider integration or through the Vercel CLI.
+### Useful resources
 
-## Vercel Edge
+- [MDN's D&D API articles](https://developer.mozilla.org/en-US/docs/Web/API/HTML_Drag_and_Drop_API) - I would have not been able to accomplist this project without these articles.
 
-This starter site is configured to deploy to [Vercel Edge Functions](https://vercel.com/docs/concepts/functions/edge-functions), which means it will be rendered at an edge location near to your users.
+## Author
 
-## Installation
-
-The adaptor will add a new `vite.config.ts` within the `adapters/` directory, and a new entry file will be created, such as:
-
-```
-└── adapters/
-    └── vercel-edge/
-        └── vite.config.ts
-└── src/
-    └── entry.vercel-edge.tsx
-```
-
-Additionally, within the `package.json`, the `build.server` script will be updated with the Vercel Edge build.
-
-## Production build
-
-To build the application for production, use the `build` command, this command will automatically run `pnpm build.server` and `pnpm build.client`:
-
-```shell
-pnpm build
-```
-
-[Read the full guide here](https://github.com/BuilderIO/qwik/blob/main/starters/adapters/vercel-edge/README.md)
-
-## Dev deploy
-
-To deploy the application for development:
-
-```shell
-pnpm deploy
-```
-
-Notice that you might need a [Vercel account](https://docs.Vercel.com/get-started/) in order to complete this step!
-
-## Production deploy
-
-The project is ready to be deployed to Vercel. However, you will need to create a git repository and push the code to it.
-
-You can [deploy your site to Vercel](https://vercel.com/docs/concepts/deployments/overview) either via a Git provider integration or through the Vercel CLI.
-
-## Vercel Edge
-
-This starter site is configured to deploy to [Vercel Edge Functions](https://vercel.com/docs/concepts/functions/edge-functions), which means it will be rendered at an edge location near to your users.
-
-## Installation
-
-The adaptor will add a new `vite.config.ts` within the `adapters/` directory, and a new entry file will be created, such as:
-
-```
-└── adapters/
-    └── vercel-edge/
-        └── vite.config.ts
-└── src/
-    └── entry.vercel-edge.tsx
-```
-
-Additionally, within the `package.json`, the `build.server` script will be updated with the Vercel Edge build.
-
-## Production build
-
-To build the application for production, use the `build` command, this command will automatically run `pnpm build.server` and `pnpm build.client`:
-
-```shell
-pnpm build
-```
-
-[Read the full guide here](https://github.com/BuilderIO/qwik/blob/main/starters/adapters/vercel-edge/README.md)
-
-## Dev deploy
-
-To deploy the application for development:
-
-```shell
-pnpm deploy
-```
-
-Notice that you might need a [Vercel account](https://docs.Vercel.com/get-started/) in order to complete this step!
-
-## Production deploy
-
-The project is ready to be deployed to Vercel. However, you will need to create a git repository and push the code to it.
-
-You can [deploy your site to Vercel](https://vercel.com/docs/concepts/deployments/overview) either via a Git provider integration or through the Vercel CLI.
-
-## Vercel Edge
-
-This starter site is configured to deploy to [Vercel Edge Functions](https://vercel.com/docs/concepts/functions/edge-functions), which means it will be rendered at an edge location near to your users.
-
-## Installation
-
-The adaptor will add a new `vite.config.ts` within the `adapters/` directory, and a new entry file will be created, such as:
-
-```
-└── adapters/
-    └── vercel-edge/
-        └── vite.config.ts
-└── src/
-    └── entry.vercel-edge.tsx
-```
-
-Additionally, within the `package.json`, the `build.server` script will be updated with the Vercel Edge build.
-
-## Production build
-
-To build the application for production, use the `build` command, this command will automatically run `pnpm build.server` and `pnpm build.client`:
-
-```shell
-pnpm build
-```
-
-[Read the full guide here](https://github.com/BuilderIO/qwik/blob/main/starters/adapters/vercel-edge/README.md)
-
-## Dev deploy
-
-To deploy the application for development:
-
-```shell
-pnpm deploy
-```
-
-Notice that you might need a [Vercel account](https://docs.Vercel.com/get-started/) in order to complete this step!
-
-## Production deploy
-
-The project is ready to be deployed to Vercel. However, you will need to create a git repository and push the code to it.
-
-You can [deploy your site to Vercel](https://vercel.com/docs/concepts/deployments/overview) either via a Git provider integration or through the Vercel CLI.
+- Frontend Mentor - [@yourusername](https://www.frontendmentor.io/profile/yourusername)
