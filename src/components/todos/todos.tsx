@@ -44,7 +44,7 @@ export const Todos = component$<TodosProps>(({ todos }) => {
                   console.log("lol xddd ", currentE?.classList.value);
                   const className = currentE!.classList.value.replace(
                     /bg-\[white\] dark:bg-dark-saturated-blue/,
-                    "bg-red-500",
+                    "bg-violet-300 dark:bg-sky-700",
                   );
                   currentE!.classList.value = className;
                   console.log("lol xddd2222 ", currentE?.classList.value);
@@ -52,7 +52,7 @@ export const Todos = component$<TodosProps>(({ todos }) => {
                 }
                 const oldE = document.getElementById(prevID.value.toString());
                 const className = oldE!.classList.value.replace(
-                  "bg-red-500",
+                  "bg-violet-300 dark:bg-sky-700",
                   "bg-[white] dark:bg-dark-saturated-blue",
                 );
                 oldE!.classList.value = className;
@@ -62,7 +62,7 @@ export const Todos = component$<TodosProps>(({ todos }) => {
                 console.log("lol xddd ", currentE?.classList.value);
                 const className2 = currentE!.classList.value.replace(
                   /bg-\[white\] dark:bg-dark-saturated-blue/,
-                  "bg-red-500",
+                  "bg-violet-300 dark:bg-sky-700",
                 );
                 currentE!.classList.value = className2;
               }
@@ -71,7 +71,7 @@ export const Todos = component$<TodosProps>(({ todos }) => {
             onDrop$={() => {
               const currentE = document.getElementById(prevID.value.toString());
               const className = currentE!.classList.value.replace(
-                "bg-red-500",
+                "bg-violet-300 dark:bg-sky-700",
                 "bg-[white] dark:bg-dark-saturated-blue",
               );
               currentE!.classList.value = className;
